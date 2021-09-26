@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 col-md-4 col-lg-3" *ngFor="let h of data">
+      <div class="panel panel-default panel-pet">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{h.commodity}}</h3>
+        </div>
+        <div class="panel-body">
+          <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" src="{{h.picture}}"
+            data-holder-rendered="true">
+          <br /><br />
+          <strong>Variety</strong>: <span>{{h.variety}}</span><br />
+          <strong>QTN</strong>: <span>{{h.totalQtl}}</span><br />
+          <strong>Location</strong>: <span>{{h.location}}</span><br /><br />
+          <button type="button" style="width: 29%;
+          padding: 9px;
+          color: white;
+          margin: 7px;
+          border-color: #8653f7;
+          background-color: #8653f7;
+          border-radius: 33px;" class="btn btn-success mr-2" (click)="showWhrDetails(h)">Apply for
+            loan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="msg">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="
+              text-align: left;
+              padding: 34px;">
+        <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+        <div class="row" *ngIf='whr'>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="panel panel-default panel-pet">
+              <div class="panel-heading">
+                <h3 class="panel-title">{{whr.commodity}}</h3>
+              </div>
+              <div class="panel-body">
+                <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" src="{{whr.picture}}"
+                  data-holder-rendered="true">
+                <br /><br />
+                <strong>ETH price</strong>: <span>{{whr.ethprice}} ETH</span><br />
+                <strong>Tenure</strong>: <span>{{whr.tenure}} Months</span><br />
+                <strong>Proseccing fee</strong>: <span>{{whr.charges/100}} %</span><br /><br />
+                <strong>Interest</strong>: <span>{{whr.interest/100}} %</span><br /><br />
+                <strong>Lender</strong>: <span>{{lenderAddress}}</span><br /><br />
+                <strong>Lien status</strong>: <span>{{paused}}</span><br /><br />
+                <strong>Loan Amount</strong>: <span>{{loanAmount}} ETH</span><br /><br />
+                <strong>Repayment Amount</strong>: <span>{{repaymentAmount}} ETH</span><br /><br />
+                <strong>Total Interest</strong>: <span>{{totalInt}} ETH</span><br /><br />
+                <!-- <strong>Total Int</strong>: <span>{{totalInt}}</span><br /><br />
+                <strong>Total Int</strong>: <span>{{totalInt}}</span><br /><br /> -->
+
+                <button type="button" style="width: 29%;
+                padding: 9px;
+                color: white;
+                margin: 7px;
+                border-color: #8653f7;
+                background-color: #8653f7;
+                border-radius: 33px;" class="btn btn-success mr-2" (click)="mint(whr)"
+                  *ngIf='mintStatus  && userAddress == owner '>
+                  Apply for
+                  loan</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" style="width: 29%;
+                padding: 9px;
+                color: white;
+                margin: 7px;
+                border-color: #8653f7;
+                background-color: #8653f7;
+                border-radius: 33px;" class="btn btn-success mr-2" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="seccessmsg">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="
+              text-align: left;
+              padding: 34px;">
+              <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="panel panel-default panel-pet">
+              <div class="panel-heading">
+                <h3 class="panel-title">Transaction {{tx}}completed successfully..</h3>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <button type="button" style="width: 29%;
+                padding: 9px;
+                color: white;
+                margin: 7px;
+                border-color: #8653f7;
+                background-color: #8653f7;
+                border-radius: 33px;" class="btn btn-success mr-2" data-dismiss="modal">ok</button>
+      </div>
+    </div>
+  </div>
+</div>

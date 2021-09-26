@@ -1,0 +1,254 @@
+<app-header></app-header>
+
+<main class="lending">
+  <section class="lending__main">
+    <div class="lending__section-one">
+      <h2 class="lending__heading">LEND</h2>
+      <h1>
+        <div>Deposit <span class="font-color-primary">ETH</span> and</div>
+        <div>enjoy <span class="font-color-primary">high yield.</span></div>
+        <div>Lend against Real World Assets</div>
+      </h1>
+      <div class="buttons">
+        <button (click)="onDepositClick()" class="button button--deposit">
+          Deposit (Earn 7% Interest)
+        </button>
+        <button (click)="onWithDrawClick()" class="button button--withdraw">
+          Withdraw
+        </button>
+      </div>
+    </div>
+    <div class="lending__section-two">
+      <h2>Your Wallet has</h2>
+      <h2><span class="lending__wallet-balance">{{onChainBal | number : '1.6-6'}} ETH</span></h2>
+      <h3 style="margin-bottom: 10px">
+        <span style="margin-bottom: 0px; display: block">Transfer ETH to your</span>
+        <span style="margin-bottom: 0px; display: block">
+          MetaMask Wallet to</span>
+        <span style="margin-bottom: 0px; display: block">
+          make a deposit on
+          <span class="font-color-primary font-bold-max">BRU</span></span>
+      </h3>
+
+      <h4 class="font-color-primary font-bold-max">Deposits</h4>
+      <h4 style="margin: 0">
+        Balance :
+        <span>{{ balance | number : '1.4-4'}} ETH </span>
+      </h4>
+
+      <h4 style="margin: 0">
+        Total deposit :
+        <span>{{ dbal | number : '1.4-4' }} ETH </span>
+      </h4>
+
+      <h4 style="margin: 0">
+        Total withdrawal :
+        <span>{{ wbal | number : '1.4-4' }} ETH </span>
+      </h4>
+
+      <h4 style="margin: 0">
+        Total Interest :
+        <span>{{ calEthInterestOnDeposit | number : '1.4-4' }} ETH </span>
+      </h4>
+    </div>
+  </section>
+
+  <footer style="
+      height: 100px;
+      background: transparent linear-gradient(180deg, #8e46cb 0%, #430f6f 100%)
+        0% 0% no-repeat padding-box;
+      opacity: 0.59;
+      width: 100%;
+    "></footer>
+
+  <div class="modal fade" id="deposit">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px; width: 460px">
+        <div class="modal-body deposit-modal" style="padding: 29px">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <h3 style="font-weight: 700">Deposit ETH</h3>
+          <div style="padding: 0px 15px; font-size: 14px; text-align: left">
+            <p style="margin: 0px">The deposited amount is lent against <span class="font-bold-max">Real World
+                Assets</span> such as agricultural commodities stored in warehouses in <span
+                class="font-bold-max">India</span></p>
+          </div>
+          <br />
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <p style="font-size: 14px" class="font-bold-max text-left">
+                  Enter ETH to be deposited
+                </p>
+                <p style="font-size: 14px" class="font-bold-max text-left">
+                  Interest Applicable
+                </p>
+              </div>
+              <div style="text-align: right" class="col">
+                <p style="font-size: 14px">
+                  <input class="input" placeholder="Enter ETH" [(ngModel)]="depositValue" />
+                </p>
+                <p style="font-size: 14px">7% p.a.</p>
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <div [ngStyle]="{
+              'padding-right': '15px',
+              display: 'flex',
+              'justify-content': 'flex-end'
+            }">
+            <button *ngIf="!depositbtnClicked" class="button button--deposit" (click)="depositToPool()">
+              Deposit
+            </button>
+            <button *ngIf="depositbtnClicked" class="button button--deposit">
+              <i class="fa fa-spin fa-circle-o-notch"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="withdraw">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px; width: 465px">
+        <div class="modal-body deposit-modal" style="padding: 29px">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <h3 style="font-weight: 700">Withdraw ETH</h3>
+          <div style="
+              padding: 0px 15px;
+              font-size: 14px;
+              text-align: left;
+              color: black;
+            ">
+            <p style="margin: 0px">Please find the withdrawable balance and the option to withdraw ETH to your MetaMask
+              wallet below</p>
+          </div>
+          <br />
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <p style="font-size: 14px" class="font-bold-max text-left">
+                  Withdrawable ETH
+                </p>
+                <p style="font-size: 14px" class="font-bold-max text-left">
+                  Enter ETH to be withdrawn
+                </p>
+
+                <!-- <p style="font-size: 14px" class="font-weight-bold text-left">
+                  Interest
+                </p> -->
+              </div>
+              <div style="text-align: right" class="col">
+                <p style="font-size: 14px">{{ this.balance | number : '1.4-4' }} ETH</p>
+                <p style="font-size: 14px">
+                  <input class="input" placeholder="Enter ETH" [(ngModel)]="withdrawalValue" />
+                </p>
+
+                <!-- <p style="font-size: 14px">
+                  <input class="input" placeholder="Enter ETH" [(ngModel)]="{}}" />
+                </p> -->
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <div [ngStyle]="{
+              'padding-right': '15px',
+              display: 'flex',
+              'justify-content': 'flex-end'
+            }">
+            <button *ngIf="!withdrawbtnClicked" class="button button--withdraw" (click)="withdrawalFormPool()">
+              Withdraw
+            </button>
+            <button *ngIf="withdrawbtnClicked" class="button button--deposit">
+              <i class="fa fa-spin fa-circle-o-notch"></i>
+            </button>
+          </div>
+
+          <p *ngIf="error" style="margin: 15px;
+          margin-bottom: 1px;">
+            {{ errorMsg }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="lendingSuccess" *ngIf="linkToViewLending">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px">
+        <div class="modal-body asssdU" style="padding: 50px">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <img src="../assets/tick.png" style="width: 180px; margin-bottom: 20px" />
+          <p>Transaction completed Successfully.</p>
+          <p style="
+              text-align: left;
+              line-height: 21px;
+              font-size: 14px;
+              margin-top: 20px;
+              word-wrap: break-word;
+            ">
+            View the transaction<br /><a href="{{ linkToViewLending }}" target="_blank">{{ linkToViewLending }}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deposit-success">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px">
+        <div class="modal-body deposit-modal" style="padding: 29px">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <h3>Deposit ETH</h3>
+          <img style="width: 150px; height: auto" src="assets/tick.png" />
+          <p>Deposit Successful</p>
+          <p>
+            Accured intereset is shown on the
+            <span class="font-bold-max">My Deposits</span> page
+          </p>
+
+          <p class="mb-0">View the Transaction on the Ethereum Blockchain</p>
+          <p style="
+              text-align: center;
+              line-height: 21px;
+              font-size: 14px;
+              margin-top: 20px;
+              word-wrap: break-word;
+            ">
+            View the transaction<br /><a href="{{ linkToViewLending }}" target="_blank">{{ linkToViewLending }}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="withdraw-success">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px">
+        <div class="modal-body deposit-modal" style="padding: 29px">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <h3>Withdraw ETH</h3>
+          <img style="width: 150px; height: auto" src="assets/tick.png" />
+
+          <p>Withdrawl Successful</p>
+          <p>Click on Deposit to lend again</p>
+
+          <p class="mb-0">View the Transaction on the Ethereum Blockchain</p>
+          <p style="
+              text-align: center;
+              line-height: 21px;
+              font-size: 14px;
+              margin-top: 20px;
+              word-wrap: break-word;
+            ">
+            View the transaction<br /><a href="{{ linkToViewLending }}" target="_blank">{{ linkToViewLending }}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

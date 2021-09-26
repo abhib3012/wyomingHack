@@ -1,0 +1,411 @@
+<app-header></app-header>
+<div id="overlay" (click)="off()">
+  <div id="text">
+    <!-- <a [routerLink]="['/lendings']" class="asdsadYY2" style="margin-right: 4%; margin-left: 0%"
+      (click)="slend()">DEPOSIT</a>
+    <a class="asdhaishgda" (click)="borrow()">BORROW</a>
+    <p style="color: #689beb;
+    display: block;
+    font-size: 17px;
+    margin: 18px;
+    text-align: left;
+    margin-left: 13%;">7% Rate of Interest p.a</p>
+    <p style="color: #689beb;
+    display: block;
+    font-size: 17px;
+    margin: 18px;
+    text-align: left;
+    margin-left: 13%;">7% Rate of Interest p.a</p> -->
+    <div class="row">
+      <div class="col-6">
+        <p class="deposith" routerLink="/lendings">DEPOSIT</p>
+        <p style="padding-left: 23%;
+        color: #689beb;font-size: 16px;">7% Rate of Interest p.a</p>
+      </div>
+      <div class="col-6">
+        <p class="borrrwh">BORROW</p>
+        <p style="padding-left: 1%;
+        color: #b9713c;font-size: 16px;">10% Rate of Interest p.a</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="text-align: center">
+  <!-- <input [checked]="test" type="checkbox"> -->
+  <!-- <p style="
+      padding: 10px;
+      text-align: right;
+      margin-right: 4%;
+      margin-top: 1%;
+      line-height: 32px;
+      word-spacing: 8px;
+    ">
+    Borrow
+    <label class="switch">
+      <input type="checkbox" [ngModel]="test" name="type" checked (change)="checkClicked(test)" />
+      <span class="slider round"></span>
+    </label>
+    Lend
+  </p> -->
+
+  <div class="row" style="margin: 40px; margin-top: 5px" *ngIf="t_lend">
+    <div class="column" *ngFor="let d of allData">
+      <div class="bordetyy" style="border: 1px solid #c1e1ff !important">
+        <img src="../assets/nft/{{ getImageName(d.commodity) }}.jpg" style="width: 240px" />
+        <p style="
+            margin-bottom: 0;
+            text-align: left;
+            padding-left: 24px;
+            font-weight: 600;
+          ">
+          {{ d.commodity }}
+          <span style="float: right; padding-right: 20px; color: grey">{{ d.db.quantity }} KGs</span>
+        </p>
+        <p style="
+            margin-bottom: 10px;
+            text-align: left;
+            padding-left: 24px;
+            line-height: 20px;
+            margin-top: 10px;
+            font-size: 13px;
+          ">
+          <strong>Value</strong> <br />{{whrPrice ( d.db) * inrUsd / ethUsd | number : '1.4-4' }} ETH (${{
+          whrPrice ( d.db) * inrUsd | number : '1.2-2'
+          }})
+        </p>
+
+        <!-- <p style="margin-bottom: 10px;">Location : {{d.location}}</p> -->
+
+        <p class="lenddBtn" (click)="showWhrDetails(d,i)" *ngIf='userAddress==d.data.owner  &&  0==d.loanAmount'>BORROW
+        </p>
+        <p class="borrowbtn" *ngIf='d.paused && userAddress==d.data.owner  && d.borrowerWithdrawStatus==false'
+          (click)="borrowerWithdraw(d,i)">DISBURSE
+        </p>
+        <p class="borrowbtn" style="background-color: #ffd146;
+      color: #483600 !important;"
+          *ngIf='d.paused && userAddress==d.data.owner  && d.loanAmount >0 && d.borrowerWithdrawStatus==true && d.borrowerRepaymentStatus==false'
+          (click)="borrowerRepaymentEthToNFT(d,i)">
+          REPAY</p>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin: 40px; margin-top: 5px" *ngIf="t_borrow">
+    <!-- <div class="col-12">
+      <p style="font-size: 50px;
+      line-height: 55px;
+      color: #0089FF;
+      margin-bottom: 35px;">It seems you don’t have<br> any commodities</p>
+    </div>
+    <div class="row" style="margin: 40px;
+    margin-top: 5px;
+    width: 100%;" *ngIf="t_borrow">
+      <div class="col-6">
+        <p style="color: #0089FF;
+        font-size: 28px;text-align: center;
+        line-height: 36px;">But you can lend against real assets from anywhere in the world</p>
+      </div>
+      <div class="col-6">
+        <p style="width: 200px;
+        background-color: #E2F0FE;
+        text-align: center;
+        padding: 10px;
+        border-radius: 6px;
+        cursor : pointer;margin: 0 auto;
+        color: #689BEB;" (click)="lendddd()">LEND NOW</p>
+      </div>
+    </div> -->
+
+    <div class="column" *ngFor="let d of allData ; let i = index">
+      <div class="bordetyy" style="border: 1px solid #fdd2a8 !important">
+        <!-- <img src="../assets/1.png" style="width: 240px;"> -->
+        <img src="../assets/nft/{{ getImageName(d.commodity) }}.jpg" style="width: 240px" />
+        <p style="
+            margin-bottom: 0;
+            text-align: left;
+            padding-left: 24px;
+            font-weight: 600;
+          ">
+          {{ d.commodity }}
+          <span style="float: right; padding-right: 20px; color: grey">{{ d.db.quantity }} KGs</span>
+        </p>
+        <p style="
+            margin-bottom: 10px;
+            text-align: left;
+            padding-left: 24px;
+            line-height: 20px;
+            margin-top: 10px;
+            font-size: 13px;
+          ">
+          <strong>Value</strong> <br />{{ d.db.ethprice }} ETH (${{
+          usdPrice(d.db.ethprice) | number : '1.2-2'
+          }})
+        </p>
+        <p class="borrowbtn" style=" background-color: #e2f0fe;
+        color: #689beb !important;" *ngIf='userAddress==d.data.owner  &&  0==d.loanAmount' (click)="applyForLoan(d,i)">
+          Apply For
+          Loan</p>
+
+        <!-- <p class="borrowbtn"
+        *ngIf='!d.paused' (click)="sendEthFromPoolToNft(d)">Apply for loan</p> -->
+        <!-- BORROW -->
+        <!-- <p class="borrowBtnInModal" (click)="borrowerWithdraw(whrdd)">BORROW</p> -->
+        <p class="borrowbtn" *ngIf='d.paused && userAddress==d.data.owner  && d.borrowerWithdrawStatus==false'
+          (click)="borrowerWithdraw(d,i)">DISBURSE
+        </p>
+        <p class="borrowbtn" style=" background-color: #ffd146;
+        color: #483600 !important;"
+          *ngIf='d.paused && userAddress==d.data.owner  && d.loanAmount >0 && d.borrowerWithdrawStatus==true'
+          (click)="borrowerRepaymentEthToNFT(d,i)">
+          REPAY</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="msg">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px">
+        <div class="modal-body asssdU" style="padding: 29px" *ngIf="whrdd">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <p class="maintitle">
+            BORROW
+            <img src="../assets/nft/{{ getImageName(whrdd.commodity) }}.jpg" class="asdsdjkh" />
+            <!-- <img src="../assets/2.png" class="asdsdjkh"> -->
+          </p>
+          <p class="asdjhsadhU">
+            You are lending ETH against
+            <span class="makeBold">{{ whrdd.quantity }} </span>
+            <span class="makeBold">{{ whrdd.commodity }}</span>
+            stored in a warehouse.
+            <!-- <span class="makeBold">{{ whrdd.location }}</span> -->
+          </p>
+          <div class="row asssdU" style="display: flex; margin-top: 28px">
+            <div class="col-6">
+              <p style="font-weight: 700">Commodity Value</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <!-- <p>{{ whrdd.db.ethprice }} ETH (${{ usdPrice( whrdd.db.ethprice) | number : '1.2-2' }})</p> -->
+              <p>{{ whrPrice (whrdd.db) * inrUsd / ethUsd | number : '1.4-4'}} ETH (${{ whrPrice ( whrdd.db) * inrUsd |
+                number : '1.2-2'
+                }})</p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex">
+            <div class="col-6">
+              <p style="font-weight: 700">Eligible Loan Amount</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>
+                {{whrPrice (whrdd.db) * inrUsd / ethUsd * (70/100) | number : '1.4-4' }} ETH
+                (${{whrPrice ( whrdd.db) *
+                inrUsd *
+                (70/100) |
+                number :
+                '1.2-2' }})
+              </p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex">
+            <div class="col-6">
+              <p style="font-weight: 700">Interest Applicable (@10% p.a)</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>{{ ( whrPrice (whrdd.db) * inrUsd / ethUsd*(70/100)) * (10/100) | number : '1.4-4' }} ETH</p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex">
+            <div class="col-6">
+              <p style="font-weight: 700">Platform Fee (@0.25%)</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>{{( whrPrice (whrdd.db) * inrUsd / ethUsd*(70/100)) * (0.25/100) | number : '1.4-4' }} ETH</p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex; margin-top: 20px">
+            <div class="col-6">
+              <p style="font-weight: 700">Net Credit</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>{{ whrPrice (whrdd.db) * inrUsd / ethUsd * (70/100) * (99.75/100) | number : '1.4-4'}} ETH</p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex">
+            <div class="col-6">
+              <p style="font-weight: 700">Interest Payable<br />(on repayment)</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>{{ ( whrPrice (whrdd.db) * inrUsd / ethUsd * (70/100)) * (10/100) | number : '1.4-4' }} ETH</p>
+            </div>
+          </div>
+          <p class="lendBtnInModal" *ngIf='userAddress==whrdd.data.owner  &&  0==whrdd.loanAmount'
+            (click)="sendEthFromPoolToNft(whrdd )">
+            BORROW
+          </p>
+          <p class="borrowbtn"
+            *ngIf='whrdd.paused && userAddress==whrdd.data.owner  && whrdd.borrowerWithdrawStatus==false'
+            (click)="borrowerWithdraw(whrdd,i)">DISBURSE
+          </p>
+          <p class="borrowbtn" style=" background-color: #ffd146;
+          color: #483600 !important;"
+            *ngIf='whrdd.paused && userAddress==whrdd.data.owner  && whrdd.loanAmount >0 && whrdd.borrowerWithdrawStatus==true'
+            (click)="borrowerRepaymentEthToNFT(whrdd,i)">
+            REPAY</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="borrow">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px">
+        <div class="modal-body asssdU" style="padding: 29px" *ngIf="whrdd">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <p class="maintitle">
+            BORROW
+            <img src="../assets/nft/{{ getImageName(whrdd.commodity) }}.jpg" class="asdsdjkh" />
+          </p>
+          <br />
+          <!-- <div class="asdjhsadhU"> -->
+          <div class="text-left">
+            <p class="m-0">
+              You are borrowing ETH against
+              <span class="makeBold"> {{ whrdd.data.quantity }} KG </span>
+            </p>
+            <p class="m-0">
+              of
+              <span class="makeBold">{{ whrdd.commodity }}</span>
+              stored in a warehouse in
+            </p>
+            <p class="m-0">
+              <span class="makeBold">{{ whrdd.db.otherDetails }}</span>
+            </p>
+          </div>
+          <div class="row asssdU" style="display: flex; margin-top: 28px">
+            <div class="col-6">
+              <p style="font-weight: 700">Commodity Value</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <!-- 
+              {{whrPrice ( d.db) * inrUsd / ethUsd | number : '1.4-4' }} ETH (${{
+                whrPrice ( d.db) * inrUsd | number : '1.2-2'
+                }}) -->
+              <p>{{ whrPrice (whrdd.db) * inrUsd / ethUsd }} ETH (${{ whrPrice ( whrdd.db) * inrUsd | number : '1.2-2'
+                }})</p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex">
+            <div class="col-6">
+              <p style="font-weight: 700">Eligible Loan Amount</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>
+                {{ whrPrice (whrdd.db) * inrUsd / ethUsd*(70/100) }} ETH (${{ usdPrice( whrPrice (whrdd.db) * inrUsd /
+                ethUsd*(70/100)) | number : '1.2-2'}})
+              </p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex">
+            <div class="col-6">
+              <p style="font-weight: 700">Interest Applicable</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>{{ whrdd.db.interest }} ETH</p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex">
+            <div class="col-6">
+              <p style="font-weight: 700">Platform Fee (@0.25%)</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>{{ whrdd.db.charges }} ETH</p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex; margin-top: 20px"
+            *ngIf="whrdd.loanamount_ETH && whrdd.interest && whrdd.charges">
+            <div class="col-6">
+              <p style="font-weight: 700">Receive</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>
+                {{
+                stringToint(whrdd.db.loanamount_ETH) -
+                stringToint(whrdd.db.interest) -
+                stringToint(whrdd.db.charges)
+                }}ETH
+              </p>
+            </div>
+          </div>
+          <div class="row asssdU" style="display: flex">
+            <div class="col-6">
+              <p style="font-weight: 700">Repayment Period</p>
+            </div>
+            <div class="col-6" style="text-align: left">
+              <p>{{ whrdd.db.tenure }} Months</p>
+            </div>
+          </div>
+          <p class="borrowBtnInModal" *ngIf="!whrdd.paused" (click)="sendEthFromPoolToNft(whrdd)">
+            Apply for loan
+          </p>
+          <!-- BORROW -->
+          <!-- <p class="borrowBtnInModal" (click)="borrowerWithdraw(whrdd)">BORROW</p> -->
+          <!-- <p class="borrowBtnInModal" *ngIf='paused && userAddress==owner' (click)="borrowerWithdraw(whrdd)">WITHDRAWAL
+          </p> -->
+          <!-- <p class="borrowBtnInModal" *ngIf='paused && userAddress==owner  && 0!=loanAmount'
+            (click)="borrowerRepaymentEthToPool(whrdd)">
+            REPAYMENT</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="successLoan">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px">
+        <div class="modal-body asssdU" style="padding: 50px">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <img src="../assets/tick.png" style="width: 180px; margin-bottom: 20px" />
+          <p>Transaction completed Successfully.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="lendingSuccess">
+    <div class="modal-dialog" style="margin-top: 8%">
+      <div class="modal-content" style="border-radius: 39px">
+        <div class="modal-body asssdU" style="padding: 50px">
+          <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+          <img src="../assets/tick.png" style="width: 180px; margin-bottom: 20px" />
+          <p>Transaction completed Successfully.</p>
+          <p style="
+              text-align: center;
+              line-height: 21px;
+              font-size: 14px;
+              margin-top: 20px;
+              word-wrap: break-word;
+            ">
+            View the transaction : <br /><a href="{{ tx }}" target="_blank">{{
+              tx
+              }}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Metamask Signup request modal  -->
+<div class="modal fade" id="metamask-signup">
+  <div class="modal-dialog" style="margin-top: 8%">
+    <div class="modal-content" style="border-radius: 39px">
+      <div class="modal-body text-center" style="padding: 29px">
+        <i class="fa fa-times closeeBtn" data-dismiss="modal"></i>
+        <h3 class="font-weight-bold">Please connect your wallet</h3>
+
+        <img class="metamask-logo mb-5" src="assets/metamask.png" alt="metamask-logo" />
+
+        <div class="px-3">
+          <button class="w-100 button button--wallet">Connect Wallet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+.colorbtn {
+  background: linear-gradient(90deg, rgba(51, 161, 255, 1) 23%, rgba(20, 69, 199, 1) 72%);
+  padding: 8px;
+  padding-top: 11px;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+  font-size: 19px;
+  width: 50px;
+  height: 50px;
+  margin: 0;
+}
+
+.pbtntext {
+  text-align: left;
+  letter-spacing: 0px;
+  color: #8E8E8E;
+  opacity: 1;
+  font-size: 18px;
+  margin: 0;
+}
+
+.col-10 {
+  width: 90%;
+}
+
+.col-2 {
+  width: 10%;
+}
+
+
+.row {
+  margin: 35px 0;
+}
+
+
+.betaa {
+  /* content: "beta"; */
+  position: fixed;
+  width: 95px;
+  height: 25px;
+  background: #EE8E4A;
+  top: 80px;
+  left: -23px;
+  text-align: center;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+  line-height: 27px;
+  transform: rotate(-45deg);
+}

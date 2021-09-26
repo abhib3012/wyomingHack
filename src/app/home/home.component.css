@@ -1,0 +1,43 @@
+.explorelend {
+  margin: 0 auto;
+  background-color: #009339;
+  color: white;
+  padding: 12px 50px;
+  border-radius: 40px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.brderbtm {
+  border-bottom: 3px solid #009339;
+  width: 816px;
+  margin: 0 auto;
+  margin-top: 17px;
+}
+
+.col-6 {
+  max-width: 50%;
+  width: 50%;
+}
+
+
+.ingstar {
+  width: 23px;
+  padding-left: 32%;
+  margin-right: 6px;
+}
+
+.col-6 p {
+  text-align: left
+}
+
+
+.centerimg {
+  width: 225px;
+    height: 216px;
+    margin: 0 23px;
+    border-radius: 22px;
+}

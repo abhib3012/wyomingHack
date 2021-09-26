@@ -1,0 +1,303 @@
+.lending {
+  display: flex;
+  flex-direction: column;
+}
+
+.lending__main {
+  padding: 30px;
+  display: flex;
+  flex: 0 0 80%;
+
+  min-height: 550px;
+  height: 78vh;
+}
+
+.lending__section-one {
+  flex: 0 0 70%;
+}
+
+.lending__section-two {
+  flex: 0 0 30%;
+}
+
+.lending__section-two h2:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.lending__heading {
+  font-weight: bold;
+}
+
+.lending__wallet-balance {
+  color: #117dc1;
+  border-bottom: 2px solid #117dc1;
+}
+
+.button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-radius: 20px;
+  padding: 5px 50px;
+}
+
+.button:not(:last-child) {
+  margin-right: 50px;
+}
+
+.button--deposit {
+  border: 2px solid #0089fc;
+  color: #0089fc;
+}
+
+.button--withdraw {
+  border: 2px solid #7858d0;
+  color: #7858d0;
+}
+
+.deposit-modal {
+  text-align: center;
+}
+
+input {
+  outline: none;
+  border-radius: 30px;
+  border: 1px solid grey;
+  padding: 2px 12px;
+  font-size: 13px;
+  width: 122px;
+}
+
+/* External CSS */
+.col-4 {
+  width: 50%;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bordetyy {
+  border: 1px solid grey;
+  margin: 8px 24px;
+  border-radius: 16px;
+  padding: 14px 0;
+}
+
+.borrowbtn {
+  width: 135px;
+  background-color: #fedbbd;
+  color: #c48150;
+  border-radius: 16px;
+  padding: 5px;
+  font-size: 12px;
+  margin-top: -2px;
+  float: right;
+  margin-right: 19px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.lenddBtn {
+  width: 93px;
+  background-color: #e2f0fe;
+  color: #689beb;
+  border-radius: 16px;
+  padding: 5px;
+  font-size: 14px;
+  margin-top: -3px;
+  float: right;
+  margin-right: 19px;
+  cursor: pointer;
+}
+
+.asdsdjkh {
+  width: 130px;
+  border-radius: 113px;
+  position: absolute;
+  right: 12px;
+  top: 15px;
+}
+
+.asdjhsadhU {
+  width: 52%;
+  font-size: 14px;
+  text-align: left;
+  margin-top: 13px;
+}
+
+.maintitle {
+  margin-bottom: 16px;
+  font-size: 41px;
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+/* input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+} */
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#overlay {
+  position: fixed;
+  /* Sit on top of the page content */
+  display: none;
+  /* Hidden by default */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  /* Black background with opacity */
+  z-index: 2;
+  /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer;
+  /* Add a pointer on hover */
+}
+
+#text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.asdhaishgda {
+  margin: 0 auto;
+  background-color: #fedbbd;
+  color: #c48150 !important;
+  padding: 17px 99px;
+  border-radius: 10px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-size: 31px;
+  text-decoration: none;
+  border: 1px solid #c48150;
+}
+
+.asdsadYY2 {
+  margin: 0 auto;
+  background-color: #e2f0fe;
+  color: #689beb !important;
+  padding: 17px 99px;
+  border-radius: 10px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-size: 31px;
+  text-decoration: none;
+  border: 1px solid #689beb;
+}
+
+.col-6 p {
+  margin-bottom: 6px;
+  font-size: 15px;
+  text-align: left;
+}
+
+.lendBtnInModal {
+  margin: 0 auto;
+  margin-top: 24px;
+  background-color: #e2f0fe;
+  color: #689beb !important;
+  padding: 2px 23px;
+  border-radius: 10px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-size: 22px;
+  text-decoration: none;
+  border: 1px solid #689beb;
+}
+
+.borrowBtnInModal {
+  margin: 0 auto;
+  margin-top: 24px;
+  background-color: #fedbbd;
+  color: #c48150 !important;
+  padding: 2px 23px;
+  border-radius: 10px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-size: 22px;
+  text-decoration: none;
+  border: 1px solid #c48150;
+}
+
+.makeBold {
+  font-weight: 700;
+}

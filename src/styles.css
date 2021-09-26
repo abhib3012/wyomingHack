@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100% !important;
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  padding: 30px 0px 0px 0px;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.container {
+  max-width: 980px;
+  margin: auto;
+}
+
+.font-color-primary {
+  color: #8e46cb;
+}
+
+.font-color-secondary {
+  color: #2196f3;
+}
+
+.font-bold-max {
+  font-weight: 800;
+}
+
+.closeeBtn {
+  position: absolute;
+  right: 20px;
+  top: 19px;
+  font-size: 16px;
+  cursor: pointer;
+}
